@@ -224,6 +224,7 @@ fn parse_args(args: &str) -> KOptions {
 }
 
 pub fn kmain(args: String, ctx_frame: *mut UserCtx) {
+    log::info!("Student ID: 1323055 | Commit: {}", env!("GIT_HASH"));
     sched_init();
 
     register_fs_drivers();

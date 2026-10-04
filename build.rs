@@ -25,4 +25,10 @@ fn main() {
     println!("cargo:rustc-env=MOSS_VERSION=#1 Moss SMP {timestamp}");
     #[cfg(not(feature = "smp"))]
     println!("cargo:rustc-env=MOSS_VERSION=#1 Moss {timestamp}");
+    let hash = std::process::Command::new("git")
+        .args(["rev-parse", "--short", "HEAD"])
+        .output()
+        .unwrap();
+    println!("cargo:rustc-env=GIT_HASH={}", String::from_utf8(hash.stdout).unwrap().trim());
+    println!("cargo::rerun-if-changed=.git/HEAD");
 }
